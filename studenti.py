@@ -3,7 +3,6 @@ import sqlite3
 
 app = Flask(__name__)
 
-# Kreiranje SQLite baze podataka
 conn = sqlite3.connect('example.db')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS students
@@ -14,9 +13,6 @@ conn.commit()
 def index():
     return render_template('index.html')
 
-# Veb servisi
-
-# GET zahtev za sve studente
 @app.route('/students', methods=['GET'])
 def get_students():
     conn = sqlite3.connect('example.db')
@@ -25,7 +21,7 @@ def get_students():
     students = c.fetchall()
     conn.close()
     return jsonify(students)
-# GET zahtev za određenog studenta po ID-u
+
 @app.route('/students/<int:student_id>', methods=['GET'])
 def get_student(student_id):
     conn = sqlite3.connect('example.db')
@@ -35,7 +31,6 @@ def get_student(student_id):
     conn.close()
     return jsonify(student)
 
-# POST zahtev za dodavanje novog studenta
 @app.route('/students', methods=['POST'])
 def add_student():
     new_student = request.json
@@ -45,7 +40,7 @@ def add_student():
     conn.commit()
     conn.close()
     return 'Student added successfully', 201
-# PUT zahtev za ažuriranje studenta
+
 @app.route('/students/<int:student_id>', methods=['PUT'])
 def update_student(student_id):
     updated_student = request.json
@@ -56,7 +51,6 @@ def update_student(student_id):
     conn.close()
     return 'Student updated successfully'
 
-# DELETE zahtev za brisanje studenta
 @app.route('/students/<int:student_id>', methods=['DELETE'])
 def delete_student(student_id):
     conn = sqlite3.connect('example.db')
@@ -66,7 +60,6 @@ def delete_student(student_id):
     conn.close()
     return 'Student deleted successfully'
     
-    # GET zahtev za pretragu studenata po imenu
 @app.route('/students/search', methods=['GET'])
 def search_students_by_name():
     name = request.args.get('name')
@@ -77,7 +70,6 @@ def search_students_by_name():
     conn.close()
     return jsonify(students)
 
-# DELETE zahtev za brisanje svih studenata
 @app.route('/students', methods=['DELETE'])
 def delete_all_students():
     conn = sqlite3.connect('example.db')

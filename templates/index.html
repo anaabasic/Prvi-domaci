@@ -7,8 +7,7 @@
 </head>
 <body>
     <h1>Rad sa studentima</h1>
-
-    <!-- Forma za dodavanje novog studenta -->
+ 
     <h2>Dodaj novog studenta</h2>
     <form id="add-student-form">
         <label for="name">Ime:</label>
@@ -17,21 +16,10 @@
         <input type="number" id="age" name="age"><br><br>
         <button type="submit">Dodaj studenta</button>
     </form>
-
-     
- 
-
-    
+  
     <script>
-
-        
-              // JavaScript zahtevi za komunikaciju sa backendom
         const addStudentForm = document.getElementById('add-student-form');
 
-
-        
-
-        // Event listener za dodavanje novog studenta
         addStudentForm.addEventListener('submit', event => {
             event.preventDefault();
             const formData = new FormData(addStudentForm);
@@ -47,12 +35,11 @@
                 body: JSON.stringify(newStudent)
             })
             .then(() => {
-                getStudents(); // Osveži listu studenata nakon dodavanja novog studenta
-                addStudentForm.reset(); // Resetuj formu za dodavanje studenta
+                getStudents(); 
+                addStudentForm.reset(); 
             });
         });
-
-        // Pozovi funkciju za prikaz svih studenata prilikom učitavanja stranice
+        
         getStudents();
     </script>
 </body>
